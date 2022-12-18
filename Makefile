@@ -2,9 +2,16 @@
 tools:
 	sdk install java 19.0.1-amzn && sdk use java 19.0.1-amzn
 
+.PHONY: lint
+lint:
+	#mvn checkstyle:checkstyle
+	# Use google_checks.xml from here and set severity=error: https://github.com/checkstyle/checkstyle/blob/checkstyle-9.3/src/main/resources/google_checks.xml
+	@echo "Check details here: https://checkstyle.sourceforge.io/config_javadoc.html"
+	mvn checkstyle:check -Dcheckstyle.config.location=google_checks.xml
+
 .PHONY: build
 build:
-	mvn package -Dmaven.test.skip=true
+	mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml
 
 .PHONY: up
 up: build
