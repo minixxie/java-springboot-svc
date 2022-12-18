@@ -38,3 +38,7 @@ make k8s-up
 ```BASH
 make k8s-curl
 ```
+
+## Spring boot
+References:
+1. [修改 SpringBoot 默认响应为 utf-8](https://blog.csdn.net/howeres/article/details/124751106)

@@ -1,1 +1,7 @@
+server:
+  servlet:
+    encoding:
+      charset: utf-8
+      force-response: true
+
 spring: {}
