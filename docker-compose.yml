@@ -1,0 +1,24 @@
+---
+version: "3.9"
+services:
+  demo-svc:
+    image: demo-svc:dont_push
+    container_name: demo-svc
+    hostname: demo-svc
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - local_backend
+    environment:
+      - VIRTUAL_HOST=demo-svc.local
+      - VIRTUAL_PORT=8080
+    expose:
+      - "8080"
+    command: >
+        sh -c 'cp -pf /config/application.localdocker.yml /application.yml
+        && java -jar /app.jar'
+networks:
+  local_backend:
+    external: true
+    name: local_backend

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-svc
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appID: demo-svc
+  template:
+    metadata:
+      labels:
+        appID: demo-svc
+    spec:
+      containers:
+      - name: java
+        image: demo-svc:dont_push
+        imagePullPolicy: IfNotPresent
+        command: ["java", "-jar",
+                  "/app.jar"]
+        ports:
+        - containerPort: 8080
