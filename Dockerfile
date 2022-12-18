@@ -14,7 +14,7 @@ ADD pom.xml .
 #RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 
 ADD . .
-RUN --mount=type=cache,target=/root/.m2 mvn package -Dmaven.test.skip=true
+RUN --mount=type=cache,target=/root/.m2 mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml
 #RUN mvn package -Dmaven.test.skip=true
 
 FROM eclipse-temurin:19.0.1_10-jre-alpine
