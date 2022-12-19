@@ -4,4 +4,13 @@ server:
       charset: utf-8
       force-response: true
 
-spring: {}
+spring:
+  datasource:
+    url: jdbc:mysql://mysql-8-0-31:3306/demo-svc
+    username: demo-svc
+    password: demo-svc
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

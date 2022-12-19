@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Book;
+import com.example.demo.repository.BookRepository;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,18 +11,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BookService {
+
+  private final BookRepository bookRepository;
+
+  @Autowired
+  public BookService(BookRepository bookRepository) {
+    this.bookRepository = bookRepository;
+  }
+
   /**
    * Get all books.
    *
    * @return {@link List} of {@link Book}
    */
   public List<Book> getBooks() {
-    return List.of(
-      new Book(
-        Long.valueOf(1),
-        "978-1400079988",
-        "War and Peace"
-      )
-    );
+    return this.bookRepository.findAll();
   }
 }
