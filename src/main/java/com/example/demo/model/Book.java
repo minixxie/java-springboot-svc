@@ -1,12 +1,31 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  * class Book, to represent a book object.
  */
+@Entity
+@Table(name = "book")
 public class Book {
+
+  @Id
   private Long id;
+
+  @Column(name = "isbn")
   private String isbn;
+
+  @Column(name = "title")
   private String title;
+
+  /**
+   * Default constructor (required by Hibernate).
+   */
+  public Book() {
+  }
 
   /**
    * Constructor for initializing all attributes.
