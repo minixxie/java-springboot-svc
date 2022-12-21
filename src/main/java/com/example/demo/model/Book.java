@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -13,6 +15,7 @@ import jakarta.persistence.Table;
 public class Book {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(name = "isbn")
@@ -34,6 +37,10 @@ public class Book {
     this.id = id;
     this.isbn = isbn;
     this.title = title;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public Long getId() {
