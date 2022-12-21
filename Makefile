@@ -67,3 +67,7 @@ k8s-curl:
 .PHONY: k8s-health
 k8s-health:
 	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: demo-svc.local' http://$$(minikube ip)/actuator; fi
+
+.PHONY: stress-test
+stress-tests:
+	ab -n 10000 -c 100 -T 'application/json; charset=utf-8' -m GET http://127.0.0.1:8080/v1/books
