@@ -1,6 +1,7 @@
 package com.example.demo.support;
 
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * format, and embed the result of the controller into the "data" field of the JSON response body.
  */
 @RestControllerAdvice
+@Slf4j
 public class RestJsonWrapperAdvice implements ResponseBodyAdvice<Object> {
 
   @Override
