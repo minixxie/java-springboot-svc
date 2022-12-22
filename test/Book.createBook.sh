@@ -1,13 +1,15 @@
 #!/bin/bash
 
+scriptPath=$(cd $(dirname "$0") && pwd)
+
 function uuid()
 {
 	id=$(uuidgen | tr [A-Z] [a-z])
 	echo $id;
 }
 
-source ../.mode.rc
-source ./config.rc
+source "$scriptPath"/../.mode.rc
+source "$scriptPath"/config.rc
 
 postData=$(cat<<EOF
 {
