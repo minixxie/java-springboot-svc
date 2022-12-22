@@ -1,10 +1,12 @@
 package com.example.demo.support;
 
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Represents a HTTP JSON response body.
  */
+@Slf4j
 public class ResponseBody {
   private Object data;
 

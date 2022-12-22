@@ -42,3 +42,14 @@ make k8s-curl
 ## Spring boot
 References:
 1. [修改 SpringBoot 默认响应为 utf-8](https://blog.csdn.net/howeres/article/details/124751106)
+
+## SLF4J
+References:
+1. [使用SLF4J和Logback](https://www.liaoxuefeng.com/wiki/1252599548343744/1264739155914176)
+2. [Logging in Spring Boot](https://www.baeldung.com/spring-boot-logging)
+3. [Spring Boot Logging with application.yml](https://howtodoinjava.com/spring-boot2/logging/configure-logging-application-yml/)
+4. [JSON Logging Best Practices](https://www.loggly.com/use-cases/json-logging-best-practices/)
+5. [Disable Spring Boot Banner at Startup](https://www.baeldung.com/spring-boot-disable-banner)
+6. [How can I change a key name in the JSON output using Logback?](https://stackoverflow.com/questions/59718108/how-can-i-change-a-key-name-in-the-json-output-using-logback)
+7. [Logging to Graylog with Spring Boot](https://www.baeldung.com/graylog-with-spring-boot)
+8. [Hibernate: Don’t use show_sql to log SQL queries](https://medium.com/javarevisited/hibernate-dont-use-show-sql-to-log-sql-queries-8698cb3013b9)

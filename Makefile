@@ -31,6 +31,7 @@ up: build down
 		cd k8s/ && kubectl apply -k . && cd -; \
 		kubectl -n apps rollout restart deployment demo-svc; \
 	else \
+		#java -jar ./target/demo-latest.jar | jq -cC; 
 		java -jar ./target/demo-latest.jar; \
 	fi
 

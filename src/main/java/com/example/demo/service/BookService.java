@@ -4,6 +4,7 @@ import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
  * class BookService.
  */
 @Service
+@Slf4j
 public class BookService {
 
   private final BookRepository bookRepository;

@@ -5,6 +5,8 @@ server:
       force-response: true
 
 spring:
+  main:
+    banner-mode: "off"
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/demo-svc
     username: demo-svc
@@ -14,3 +16,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+logging:
+  level:  # TRACE/DEBUG/INFO/WARN/ERROR/FATAL/OFF
+    root: INFO
+    org.springframework.web: INFO
+    com.example.demo: DEBUG
+#  pattern:
+#    console: "{\"t\":\"%date{ISO8601}\",\"l\":\"%level\",\"f\":\"%file\",\"ln\":\"%line\",\"m\":\"%msg\",\"thread\":\"%thread\"}%n"

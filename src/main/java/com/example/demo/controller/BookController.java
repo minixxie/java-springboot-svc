@@ -4,6 +4,7 @@ import com.example.demo.model.Book;
 import com.example.demo.service.BookService;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,12 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
  * class BookController, handles API endpoints about books.
  */
 @RestController
+@Slf4j
 public class BookController {
-
   private final BookService bookService;
 
   @Autowired
   public BookController(BookService bookService) {
+    log.info("BookController() constructor...");
     this.bookService = bookService;
   }
 
