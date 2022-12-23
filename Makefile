@@ -22,6 +22,7 @@ build:
 		mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml; \
 	fi
 
+# --add-opens java.base/java.lang=ALL-UNNAMED: https://stackoverflow.com/questions/68168691/java-lang-reflect-inaccessibleobjectexception-unable-to-make-protected-final-ja
 .PHONY: up
 up: build down
 	@source ./.mode.rc ; \
@@ -32,7 +33,8 @@ up: build down
 		kubectl -n apps rollout restart deployment demo-svc; \
 	else \
 		#java -jar ./target/demo-latest.jar | jq -cC; 
-		java -jar ./target/demo-latest.jar; \
+		java --add-opens java.base/java.lang=ALL-UNNAMED \
+			-jar ./target/demo-latest.jar | jq -cC; \
 	fi
 
 .PHONY: down

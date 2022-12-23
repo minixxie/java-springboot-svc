@@ -18,6 +18,9 @@ spring:
     properties:
       hibernate:
         format_sql: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration  # Workaround for https://github.com/spring-projects/spring-boot/issues/16079
+
 logging:
   level:  # TRACE/DEBUG/INFO/WARN/ERROR/FATAL/OFF - on production, all of them should be ERROR
     root: INFO
@@ -28,3 +31,6 @@ logging:
     org.hibernate.stat: DEBUG                 # to identify the most critical queries and prevent possible crashes in the prod environment
   # pattern:
     # console: "{\"t\":\"%date{ISO8601}\",\"l\":\"%level\",\"f\":\"%file\",\"ln\":\"%line\",\"m\":\"%msg\",\"thread\":\"%thread\"}%n"
+mybatis:
+  configuration:
+    default-scripting-language: org.mybatis.scripting.thymeleaf.ThymeleafLanguageDriver  # Enable mybatis-thymeleaf feature

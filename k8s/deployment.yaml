@@ -17,7 +17,8 @@ spec:
       - name: java
         image: demo-svc:dont_push
         imagePullPolicy: IfNotPresent
-        command: ["java", "-jar",
-                  "/app.jar"]
+        command: ["java",
+                  "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+                  "-jar", "/app.jar"]
         ports:
         - containerPort: 8080
