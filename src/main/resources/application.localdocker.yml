@@ -12,6 +12,7 @@ spring:
     # url: jdbc:mysql://mysql.db.svc:3306/demo-svc  # for mysql deployed in k8s in "db" namespace
     username: demo-svc
     password: demo-svc
+    #driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: false  # note: enabling this will mess up JSON log format
     properties:

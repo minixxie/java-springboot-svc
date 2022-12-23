@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.mapper.BookMapper;
 import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
 import java.util.List;
@@ -15,10 +16,17 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class BookService {
 
+  private final BookMapper bookMapper;
   private final BookRepository bookRepository;
+  private final boolean useMyBatis;
 
+  /**
+   * Constructor with dependencies injection.
+   */
   @Autowired
-  public BookService(BookRepository bookRepository) {
+  public BookService(BookMapper bookMapper, BookRepository bookRepository) {
+    this.useMyBatis = true;
+    this.bookMapper = bookMapper;
     this.bookRepository = bookRepository;
   }
 
@@ -28,7 +36,12 @@ public class BookService {
    * @return {@link List} of {@link Book}
    */
   public List<Book> getBooks() {
-    return this.bookRepository.findAll();
+    if (useMyBatis) {
+      log.debug("Using MyBatis...");
+      return this.bookMapper.findAll();
+    } else {
+      return this.bookRepository.findAll();
+    }
   }
 
   /**
@@ -37,7 +50,12 @@ public class BookService {
    * @return {@link Book}
    */
   public Optional<Book> getBookById(Long bookId) {
-    return this.bookRepository.findById(bookId);
+    if (useMyBatis) {
+      log.debug("Using MyBatis...");
+      return this.bookMapper.findById(bookId);
+    } else {
+      return this.bookRepository.findById(bookId);
+    }
   }
 
   /**
@@ -46,6 +64,12 @@ public class BookService {
    * @return {@link Book}
    */
   public Book createBook(Book book) {
-    return this.bookRepository.save(book);
+    if (useMyBatis) {
+      log.debug("Using MyBatis...");
+      this.bookMapper.insert(book);
+      return book;
+    } else {
+      return this.bookRepository.save(book);
+    }
   }
 }

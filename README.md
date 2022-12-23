@@ -53,3 +53,9 @@ References:
 6. [How can I change a key name in the JSON output using Logback?](https://stackoverflow.com/questions/59718108/how-can-i-change-a-key-name-in-the-json-output-using-logback)
 7. [Logging to Graylog with Spring Boot](https://www.baeldung.com/graylog-with-spring-boot)
 8. [Hibernate: Don’t use show_sql to log SQL queries](https://medium.com/javarevisited/hibernate-dont-use-show-sql-to-log-sql-queries-8698cb3013b9)
+
+## MyBatis
+References:
+1. [MyBatis with Spring](https://www.baeldung.com/spring-mybatis)
+2. [使用IDEA创建SpringBoot+MyBatis+MySql项目实现登录注册功能](https://bbs.huaweicloud.com/blogs/350657)
+3. [How to solve "Mapper method has an unsupported return type"](https://stackoverflow.com/questions/66239665/how-to-solve-mapper-method-has-an-unsupported-return-type)
