@@ -15,13 +15,19 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface BookMapper {
-  @Select("SELECT * FROM book")
+  @Select("""
+        SELECT * FROM book
+      """)
   public List<Book> findAll();
 
-  @Select("SELECT * FROM book WHERE id = #{id}")
+  @Select("""
+        SELECT * FROM book
+        WHERE
+        id = /*[# mb:p='id']*/ 1 /*[/]*/
+      """)
   public Optional<Book> findById(Long id);
 
-  @Insert("INSERT INTO book (isbn, title) VALUES (#{isbn}, #{title})")
+  @Insert("com/example/demo/mapper/BookMapper.insert.sql")
   @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
   public int insert(Book book);
 }

@@ -59,3 +59,9 @@ References:
 1. [MyBatis with Spring](https://www.baeldung.com/spring-mybatis)
 2. [使用IDEA创建SpringBoot+MyBatis+MySql项目实现登录注册功能](https://bbs.huaweicloud.com/blogs/350657)
 3. [How to solve "Mapper method has an unsupported return type"](https://stackoverflow.com/questions/66239665/how-to-solve-mapper-method-has-an-unsupported-return-type)
+
+## MyBatis Thymeleaf
+References:
+1. [MyBatis Thymeleaf User’s Guide](https://mybatis.org/thymeleaf-scripting/user-guide.html)
+2. [Quick Start](https://github.com/mybatis/thymeleaf-scripting/wiki/Quick-Start)
+3. [java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class when upgrade from java 11 to 17](https://stackoverflow.com/questions/68168691/java-lang-reflect-inaccessibleobjectexception-unable-to-make-protected-final-ja)

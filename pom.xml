@@ -62,6 +62,12 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>3.0.1</version>
 		</dependency>
+		<!-- MyBatis Thymeleaf -->
+		<dependency>
+			<groupId>org.mybatis.scripting</groupId>
+			<artifactId>mybatis-thymeleaf</artifactId>
+			<version>1.0.4</version>
+		</dependency>
 
 	</dependencies>
 
