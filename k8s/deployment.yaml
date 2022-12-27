@@ -10,6 +10,13 @@ spec:
       appID: demo-svc
   template:
     metadata:
+      annotations:
+        # https://developer.ibm.com/tutorials/monitoring-kubernetes-prometheus/
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8080"
+        # "sidecar.jaegertracing.io/inject": "true"  # https://access.redhat.com/documentation/en-us/openshift_container_platform/4.4/html/jaeger/jaeger-sidecar-automatic_jaeger-deploying
+        # sidecar.opentelemetry.io/inject: "true"  # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#install-opentelemetry-collector
       labels:
         appID: demo-svc
     spec:
@@ -17,8 +24,28 @@ spec:
       - name: java
         image: demo-svc:dont_push
         imagePullPolicy: IfNotPresent
+        # --add-opens java.base/java.lang=ALL-UNNAMED - https://stackoverflow.com/questions/68168691/java-lang-reflect-inaccessibleobjectexception-unable-to-make-protected-final-ja
         command: ["java",
                   "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+                  "-javaagent:/opentelemetry-javaagent.jar",
                   "-jar", "/app.jar"]
         ports:
         - containerPort: 8080
+        env:
+        # just in case useful for accessing any daemonset
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+
+        # [OTEL variables]
+        # 1. https://opentelemetry.io/docs/concepts/sdk-configuration/otlp-exporter-configuration/
+        # 2. https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md
+
+        # same as JVM option -Dotel.exporter.otlp.endpoint=http://signoz-otel-collector.signoz.svc:4317
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          #value: "http://signoz-otel-collector.signoz.svc:4317"  # sending gRPC to collector in signoz chart
+          value: "http://opentelemetry-collector.otel.svc:4317"  # sending gRPC to collector in opentelemetry-collector chart
+        # same as JVM option -Dotel.resource.attributes=service.name=demo-svc
+        - name: OTEL_RESOURCE_ATTRIBUTES
+          value: "service.name=demo-svc"
