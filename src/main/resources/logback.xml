@@ -14,7 +14,12 @@
               "m": "%message",
               "thread": "%thread",
               "class": "%logger{40}",
-              "stack_trace": "%exception{10}"
+              "stack_trace": "%exception{10}",
+              "traceId": "%X{traceId:-}",
+              "spanId": "%X{spanId:-}",
+              "parentSpanId": "%X{parentSpandId:-}",
+              "requestId": "%X{requestId:-}",
+              "remoteIp": "%X{remoteIp:-}"
             }
           </pattern>
         </pattern>

@@ -5,6 +5,8 @@ server:
       force-response: true
 
 spring:
+  application:
+    name: demo-svc  # used as fallback for tracing
   main:
     banner-mode: "off"
   datasource:

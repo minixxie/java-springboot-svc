@@ -65,3 +65,16 @@ References:
 1. [MyBatis Thymeleaf User’s Guide](https://mybatis.org/thymeleaf-scripting/user-guide.html)
 2. [Quick Start](https://github.com/mybatis/thymeleaf-scripting/wiki/Quick-Start)
 3. [java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class when upgrade from java 11 to 17](https://stackoverflow.com/questions/68168691/java-lang-reflect-inaccessibleobjectexception-unable-to-make-protected-final-ja)
+
+
+## Jaeger
+References:
+1. [opentracing-contrib/java-spring-jaeger](https://github.com/opentracing-contrib/java-spring-jaeger)
+
+## OpenTelemetry
+References:
+1. [OpenTelemetry Instrumentation for Java](https://github.com/open-telemetry/opentelemetry-java-instrumentation)
+2. [logback输出json格式日志（包括mdc）发送到kafka](https://www.cnblogs.com/bigben0123/p//10613257.html)
+3. [Using Micrometer to trace your Spring Boot app](https://springbootlearning.medium.com/using-micrometer-to-trace-your-spring-boot-app-1fe6ff9982ae)
+4. [Spring Boot 3 Observability with Grafana](https://piotrminkowski.com/2022/11/03/spring-boot-3-observability-with-grafana)
+5. [Observability with Spring Boot 3](https://spring.io/blog/2022/10/12/observability-with-spring-boot-3)
