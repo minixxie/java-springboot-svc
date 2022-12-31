@@ -10,6 +10,7 @@ spring:
   main:
     banner-mode: "off"
   datasource:
+    # url: jdbc:postgresql://postgis-15-3-3:5432/demo-svc?ssl=false
     url: jdbc:mysql://127.0.0.1:3306/demo-svc
     # url: jdbc:mysql://mysql.db.svc:3306/demo-svc  # for mysql deployed in k8s in "db" namespace
     username: demo-svc
