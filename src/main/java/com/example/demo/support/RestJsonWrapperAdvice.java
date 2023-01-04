@@ -1,5 +1,7 @@
 package com.example.demo.support;
 
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanContext;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -33,6 +35,12 @@ public class RestJsonWrapperAdvice implements ResponseBodyAdvice<Object> {
       ServerHttpRequest request,
       ServerHttpResponse response
   ) {
+    SpanContext spanContext = Span.current().getSpanContext();
+    response.getHeaders().add("traceparent",
+        "00-" + spanContext.getTraceId() + "-"
+        + spanContext.getSpanId() + "-" + spanContext.getTraceFlags());
+
+    response.getHeaders().add("X-Request-ID", request.getHeaders().getFirst("X-Request-ID"));
 
     if (body instanceof ResponseBody) {
       return body;

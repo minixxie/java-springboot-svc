@@ -78,3 +78,8 @@ References:
 3. [Using Micrometer to trace your Spring Boot app](https://springbootlearning.medium.com/using-micrometer-to-trace-your-spring-boot-app-1fe6ff9982ae)
 4. [Spring Boot 3 Observability with Grafana](https://piotrminkowski.com/2022/11/03/spring-boot-3-observability-with-grafana)
 5. [Observability with Spring Boot 3](https://spring.io/blog/2022/10/12/observability-with-spring-boot-3)
+6. [Leveraging OpenTelemetry For Custom Context Propagation](https://doordash.engineering/2021/06/17/leveraging-opentelemetry-for-custom-context-propagation/)
+7. [ADDING HEADERS TO EVERY SPRING BOOT RESPONSE](https://www.mkammerer.de/blog/adding-headers-to-every-spring-boot-response/)
+8. [Capture tracing header for incoming requests](https://github.com/open-telemetry/opentelemetry-dotnet/issues/337)
+9. [Using instrumentation annotations with a Java agent](https://opentelemetry.io/docs/instrumentation/java/automatic/annotations/)
+10. [Jaeger vs. Helios: Which One Should You Choose?](https://gethelios.dev/blog/jaeger-vs-helios-which-one-should-you-choose/)
