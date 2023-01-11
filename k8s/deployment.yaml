@@ -30,7 +30,8 @@ spec:
                   "-javaagent:/opentelemetry-javaagent.jar",
                   "-jar", "/app.jar"]
         ports:
-        - containerPort: 8080
+        - containerPort: 8080  # spring boot HTTP port
+        - containerPort: 9999  # xxl-job HTTP port
         env:
         # just in case useful for accessing any daemonset
         - name: HOST_IP
