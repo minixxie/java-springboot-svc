@@ -14,7 +14,8 @@ services:
       - VIRTUAL_HOST=demo-svc.local
       - VIRTUAL_PORT=8080
     expose:
-      - "8080"
+      - "8080"  # spring boot HTTP port
+      - "9999"  # xxl-job HTTP port
     command: >
         sh -c 'cp -pf /config/application.localdocker.yml /application.yml
         && java -jar /app.jar'
