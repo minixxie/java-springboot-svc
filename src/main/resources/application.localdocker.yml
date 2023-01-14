@@ -6,7 +6,7 @@ server:
 
 spring:
   application:
-    name: demo-svc  # used as fallback for tracing
+    name: b-svc  # used as fallback for tracing
   main:
     banner-mode: "off"
   datasource:
@@ -49,7 +49,7 @@ xxl:
       addresses: http://xxljob-2-3-1:8080/xxl-job-admin
     accessToken: default_token
     executor:
-      appname: demo-svc
+      appname: b-svc
       address: ""
       ip: ""
       port: 9999
