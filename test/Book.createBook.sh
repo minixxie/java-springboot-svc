@@ -6,6 +6,7 @@ function uuid()
 	echo $id;
 }
 
+source ../.mode.rc
 source ./config.rc
 
 postData=$(cat<<EOF
