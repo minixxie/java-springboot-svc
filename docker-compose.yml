@@ -1,25 +1,27 @@
 ---
 version: "3.9"
 services:
-  demo-svc:
-    image: demo-svc:dont_push
-    container_name: demo-svc
-    hostname: demo-svc
+  java_springboot_svc:
+    image: java_springboot_svc:dont_push
+    container_name: java_springboot_svc
+    hostname: java_springboot_svc
     build:
       context: .
       dockerfile: Dockerfile
     networks:
-      - local_backend
+      - local_network
     environment:
-      - VIRTUAL_HOST=demo-svc.local
+      - VIRTUAL_HOST=java_springboot_svc.local
       - VIRTUAL_PORT=8080
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_RESOURCE_ATTRIBUTES-service.name=java_springboot_svc
     expose:
       - "8080"  # spring boot HTTP port
       - "9999"  # xxl-job HTTP port
     command: >
         sh -c 'cp -pf /config/application.localdocker.yml /application.yml
-        && java -jar /app.jar'
+        && java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/opentelemetry-javaagent.jar -jar /app.jar'
 networks:
-  local_backend:
+  local_network:
     external: true
-    name: local_backend
+    name: local_network

@@ -40,7 +40,7 @@ up: build down
 down:
 	@source ./.mode.rc ; \
 	if [ "$$MODE" == DOCKER ]; then \
-		docker rm -f demo-svc; \
+		docker rm -f java_springboot_svc; \
 	elif [ "$$MODE" == K8S ]; then \
 		cd k8s/ && kubectl delete -k . && cd -; \
 	else \
@@ -51,7 +51,7 @@ down:
 logs:
 	@source ./.mode.rc ; \
 	if [ "$$MODE" == DOCKER ]; then \
-		docker logs -f demo-svc; \
+		docker logs -f java_springboot_svc; \
 	elif [ "$$MODE" == K8S ]; then \
 		kubectl -n apps logs -f -l appID=demo-svc; \
 	else \
@@ -64,11 +64,11 @@ curl:
 
 .PHONY: k8s-curl
 k8s-curl:
-	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: demo-svc.local' http://$$(minikube ip)/User/getName; fi
+	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: java_springboot_svc.local' http://$$(minikube ip)/User/getName; fi
 
 .PHONY: k8s-health
 k8s-health:
-	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: demo-svc.local' http://$$(minikube ip)/actuator; fi
+	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: java_springboot_svc.local' http://$$(minikube ip)/actuator; fi
 
 .PHONY: stress-test
 stress-tests:

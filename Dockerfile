@@ -1,10 +1,10 @@
 FROM eclipse-temurin:19.0.1_10-jdk-alpine as jdk
 
 RUN cd /usr/local \
-	&& wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz \
-	&& tar xzf apache-maven-3.8.7-bin.tar.gz \
-	&& ln -sf /usr/local/apache-maven-3.8.7/bin/mvn /usr/local/bin/mvn \
-	&& rm -rf /usr/local/apache-maven-3.8.7-bin.tar.gz
+	&& wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz \
+	&& tar xzf apache-maven-3.9.4-bin.tar.gz \
+	&& ln -sf /usr/local/apache-maven-3.9.4/bin/mvn /usr/local/bin/mvn \
+	&& rm -rf /usr/local/apache-maven-3.9.4-bin.tar.gz
 
 ARG APP_NAME
 
@@ -27,3 +27,10 @@ ADD ./src/main/resources/application.localdocker.yml /config/application.localdo
 ADD ./src/main/resources/application.yml /config/application.local.yml
 
 ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar /opentelemetry-javaagent.jar
+
+COPY        --from=wtfcoderz/static-healthcheck /healthcheck /
+HEALTHCHECK --interval=5s --timeout=2s --start-period=30s --retries=2 CMD ["/healthcheck", "-http", "http://127.0.0.1:8080/actuator/health"]
+# HTTP port
+EXPOSE 8080
+# xxl-job HTTP port
+EXPOSE 9999
