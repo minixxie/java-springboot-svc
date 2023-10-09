@@ -9,11 +9,11 @@ services:
       context: .
       dockerfile: Dockerfile
     networks:
-      - local_network
+      - local
     environment:
       - VIRTUAL_HOST=java_springboot_svc.local
       - VIRTUAL_PORT=8080
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-0-86-0:4317
       - OTEL_RESOURCE_ATTRIBUTES-service.name=java_springboot_svc
     expose:
       - "8080"  # spring boot HTTP port
@@ -22,6 +22,6 @@ services:
         sh -c 'cp -pf /config/application.localdocker.yml /application.yml
         && java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/opentelemetry-javaagent.jar -jar /app.jar'
 networks:
-  local_network:
+  local:
     external: true
-    name: local_network
+    name: local

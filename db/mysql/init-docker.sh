@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mysqlcli="docker run --rm -t --net=local_network mysql:8.0.31-oracle mysql -A --default-character-set=utf8 -hmysql-8-0-31 -uroot -phello123"
+mysqlcli="docker run --rm -t --net=local mysql:8.0.31-oracle mysql -A --default-character-set=utf8 -hmysql-8-0-31 -uroot -phello123"
 
 step0=$(cat 00-db.sql | tr '\012' ' ')
 $mysqlcli -e "$step0"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cli="docker run --rm -t --net=local_network -e PGPASSWORD=hello123 postgis/postgis:15-3.3-alpine psql -hpostgis-15-3-3 -Upostgres"
+cli="docker run --rm -t --net=local -e PGPASSWORD=hello123 postgis/postgis:15-3.3-alpine psql -hpostgis-15-3-3 -Upostgres"
 
 step0=$(cat 00-db.sql | tr '\012' ' ')
 $cli -c "$step0"
