@@ -11,7 +11,7 @@ step1=$(cat 01-user.sql | tr '\012' ' ')
 $cli -c "$step1"
 
 step2=$(cat 02-tables.sql | tr '\012' ' ')
-$cli demo-svc -c "$step2"
+$cli java-springboot-svc -c "$step2"
 step3=$(cat 03-data.sql | tr '\012' ' ')
-$cli demo-svc -c "$step3"
+$cli java-springboot-svc -c "$step3"
 

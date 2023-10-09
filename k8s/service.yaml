@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-svc
+  name: java-springboot-svc
   namespace: apps
 spec:
   selector:
-    appID: demo-svc
+    appID: java-springboot-svc
   type: LoadBalancer
   ports:
   - protocol: TCP

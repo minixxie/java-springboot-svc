@@ -6,15 +6,15 @@ server:
 
 spring:
   application:
-    name: demo-svc  # used as fallback for tracing
+    name: java-springboot-svc  # used as fallback for tracing
   main:
     banner-mode: "off"
   datasource:
-    # url: jdbc:postgresql://postgis-15-3-3:5432/demo-svc?ssl=false
-    url: jdbc:mysql://mysql-8-0-31:3306/demo-svc
-    # url: jdbc:mysql://mysql.db.svc:3306/demo-svc  # for mysql deployed in k8s in "db" namespace
-    username: demo-svc
-    password: demo-svc
+    # url: jdbc:postgresql://postgis-15-3-3:5432/java-springboot-svc?ssl=false
+    url: jdbc:mysql://mysql-8-0-31:3306/java-springboot-svc
+    # url: jdbc:mysql://mysql.db.svc:3306/java-springboot-svc  # for mysql deployed in k8s in "db" namespace
+    username: java-springboot-svc
+    password: java-springboot-svc
     #driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: false  # note: enabling this will mess up JSON log format
@@ -49,7 +49,7 @@ xxl:
       addresses: http://xxljob-2-3-1:8080/xxl-job-admin
     accessToken: default_token
     executor:
-      appname: demo-svc
+      appname: java-springboot-svc
       address: ""
       ip: ""
       port: 9999

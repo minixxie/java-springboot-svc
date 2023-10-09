@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: demo-svc
+  name: java-springboot-svc
   namespace: apps
 spec:
   rules:
-  - host: demo-svc.local
+  - host: java-springboot-svc.local
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: demo-svc
+            name: java-springboot-svc
             port:
               number: 80

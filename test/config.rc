@@ -1,7 +1,7 @@
 if [ "$MODE" == DOCKER ]; then
-	url=http://demo-svc.local
+	url=http://java-springboot-svc.local
 elif [ "$MODE" == K8S ]; then
-	url=http://demo-svc.local
+	url=http://java-springboot-svc.local
 else  # LOCAL
 	url=http://127.0.0.1:8080
 fi

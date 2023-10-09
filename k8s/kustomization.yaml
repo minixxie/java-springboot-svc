@@ -4,7 +4,7 @@ metadata:
   name: arbitrary
 
 commonLabels:
-  appID: demo-svc
+  appID: java-springboot-svc
 
 resources:
 - deployment.yaml

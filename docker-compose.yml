@@ -1,20 +1,20 @@
 ---
 version: "3.9"
 services:
-  java_springboot_svc:
-    image: java_springboot_svc:dont_push
-    container_name: java_springboot_svc
-    hostname: java_springboot_svc
+  java-springboot-svc:
+    image: java-springboot-svc:dont_push
+    container_name: java-springboot-svc
+    hostname: java-springboot-svc
     build:
       context: .
       dockerfile: Dockerfile
     networks:
       - local
     environment:
-      - VIRTUAL_HOST=java_springboot_svc.local
+      - VIRTUAL_HOST=java-springboot-svc.local
       - VIRTUAL_PORT=8080
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-0-86-0:4317
-      - OTEL_RESOURCE_ATTRIBUTES-service.name=java_springboot_svc
+      - OTEL_RESOURCE_ATTRIBUTES-service.name=java-springboot-svc
     expose:
       - "8080"  # spring boot HTTP port
       - "9999"  # xxl-job HTTP port

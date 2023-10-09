@@ -3,5 +3,5 @@ CREATE TABLE "book" (
   isbn VARCHAR(255) NOT NULL,
   title VARCHAR(255) NOT NULL
 );
-GRANT ALL PRIVILEGES ON TABLE "book" TO "demo-svc";
-GRANT USAGE, SELECT ON SEQUENCE "book_id_seq" TO "demo-svc";
+GRANT ALL PRIVILEGES ON TABLE "book" TO "java-springboot-svc";
+GRANT USAGE, SELECT ON SEQUENCE "book_id_seq" TO "java-springboot-svc";

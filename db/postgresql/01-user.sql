@@ -1,2 +1,2 @@
-CREATE USER "demo-svc" with encrypted password 'demo-svc';
-GRANT ALL PRIVILEGES ON DATABASE "demo-svc" to "demo-svc";
+CREATE USER "java-springboot-svc" with encrypted password 'java-springboot-svc';
+GRANT ALL PRIVILEGES ON DATABASE "java-springboot-svc" to "java-springboot-svc";

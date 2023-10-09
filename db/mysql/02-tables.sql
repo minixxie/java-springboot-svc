@@ -1,4 +1,4 @@
-use demo-svc;
+use java-springboot-svc;
 DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,

@@ -1,1 +1,1 @@
-CREATE DATABASE "demo-svc";
+CREATE DATABASE "java-springboot-svc";

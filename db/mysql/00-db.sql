@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS `demo-svc`;
-CREATE DATABASE `demo-svc` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+DROP DATABASE IF EXISTS `java-springboot-svc`;
+CREATE DATABASE `java-springboot-svc` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;

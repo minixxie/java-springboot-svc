@@ -1,3 +1,5 @@
+DOCKER := nerdctl
+COMPOSE := nerdctl compose
 SHELL := /bin/bash
 
 .PHONY: tools
@@ -15,9 +17,9 @@ lint:
 build:
 	@source ./.mode.rc ; \
 	if [ "$$MODE" == DOCKER ]; then \
-		DOCKER_BUILDKIT=1 docker-compose build; \
+		${COMPOSE} build; \
 	elif [ "$$MODE" == K8S ]; then \
-		DOCKER_BUILDKIT=1 docker-compose build; \
+		${COMPOSE} build; \
 	else \
 		mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml; \
 	fi
@@ -27,10 +29,10 @@ build:
 up: build down
 	@source ./.mode.rc ; \
 	if [ "$$MODE" == DOCKER ]; then \
-		DOCKER_BUILDKIT=1 docker-compose up -d; \
+		${COMPOSE} up -d; \
 	elif [ "$$MODE" == K8S ]; then \
 		cd k8s/ && kubectl apply -k . && cd -; \
-		kubectl -n apps rollout restart deployment demo-svc; \
+		kubectl -n apps rollout restart deployment java-springboot-svc; \
 	else \
 		java --add-opens java.base/java.lang=ALL-UNNAMED \
 			-jar ./target/demo-latest.jar | jq -cC; \
@@ -40,7 +42,7 @@ up: build down
 down:
 	@source ./.mode.rc ; \
 	if [ "$$MODE" == DOCKER ]; then \
-		docker rm -f java_springboot_svc; \
+		${DOCKER} rm -f java-springboot-svc; \
 	elif [ "$$MODE" == K8S ]; then \
 		cd k8s/ && kubectl delete -k . && cd -; \
 	else \
@@ -51,9 +53,9 @@ down:
 logs:
 	@source ./.mode.rc ; \
 	if [ "$$MODE" == DOCKER ]; then \
-		docker logs -f java_springboot_svc; \
+		${DOCKER} logs -f java-springboot-svc; \
 	elif [ "$$MODE" == K8S ]; then \
-		kubectl -n apps logs -f -l appID=demo-svc; \
+		kubectl -n apps logs -f -l appID=java-springboot-svc; \
 	else \
 		echo "NOOP"; \
 	fi
@@ -64,11 +66,11 @@ curl:
 
 .PHONY: k8s-curl
 k8s-curl:
-	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: java_springboot_svc.local' http://$$(minikube ip)/User/getName; fi
+	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: java-springboot-svc.local' http://$$(minikube ip)/User/getName; fi
 
 .PHONY: k8s-health
 k8s-health:
-	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: java_springboot_svc.local' http://$$(minikube ip)/actuator; fi
+	if [ $$(which minikube) != "" ]; then curl -f -v -H 'Host: java-springboot-svc.local' http://$$(minikube ip)/actuator; fi
 
 .PHONY: stress-test
 stress-tests:
