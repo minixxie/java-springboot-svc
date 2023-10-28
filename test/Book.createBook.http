@@ -1,0 +1,8 @@
+POST http://java-springboot-svc.local/v1/books
+Content-Type: application/json; charset=utf-8
+
+{
+	"id": 8899,
+	"isbn": "$(uuid)",
+	"title": "This is a book title $(uuid)"
+}

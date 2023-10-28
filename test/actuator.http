@@ -1,0 +1,2 @@
+GET http://java-springboot-svc.local/actuator
+Content-Type: application/json; charset=utf-8

@@ -1,4 +1,4 @@
-FROM eclipse-temurin:19.0.1_10-jdk-alpine as jdk
+FROM eclipse-temurin:19.0.1_10-jdk as jdk
 
 RUN cd /usr/local \
 	&& wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz \
@@ -17,7 +17,7 @@ ADD . .
 RUN --mount=type=cache,target=/root/.m2 mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml
 #RUN mvn package -Dmaven.test.skip=true
 
-FROM eclipse-temurin:19.0.1_10-jre-alpine
+FROM eclipse-temurin:19.0.1_10-jre
 
 ARG APP_NAME
 ENV APP_NAME=${APP_NAME}

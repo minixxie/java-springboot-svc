@@ -14,7 +14,7 @@ services:
       - VIRTUAL_HOST=java-springboot-svc.local
       - VIRTUAL_PORT=8080
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-0-86-0:4317
-      - OTEL_RESOURCE_ATTRIBUTES-service.name=java-springboot-svc
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=java-springboot-svc
     expose:
       - "8080"  # spring boot HTTP port
       - "9999"  # xxl-job HTTP port
