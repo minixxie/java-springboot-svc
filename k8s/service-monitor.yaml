@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: java-springboot-svc
+  namespace: apps
+  labels:
+    appID: java-springboot-svc
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      appID: java-springboot-svc
+  namespaceSelector:
+    matchNames:
+      - apps
+  endpoints:
+    - port: http-metrics
+      interval: 15s
+      path: /actuator/prometheus

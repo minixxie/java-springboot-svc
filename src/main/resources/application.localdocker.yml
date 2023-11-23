@@ -39,6 +39,7 @@ mybatis:
     default-scripting-language: org.mybatis.scripting.thymeleaf.ThymeleafLanguageDriver  # Enable mybatis-thymeleaf feature
 
 management:
+  server.port: 8081
   endpoints.web.exposure.include: health,info,prometheus
   metrics.distribution.percentiles-histogram.http.server.requests: true
   tracing.sampling.probability: 1.0

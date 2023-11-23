@@ -1,5 +1,6 @@
-DOCKER := nerdctl
-COMPOSE := nerdctl compose
+DOCKER ?= nerdctl
+COMPOSE ?= nerdctl compose
+BUILD_OPS ?= --namespace=k8s.io
 SHELL := /bin/bash
 
 .PHONY: tools
@@ -19,7 +20,7 @@ build:
 	if [ "$$MODE" == DOCKER ]; then \
 		${COMPOSE} build; \
 	elif [ "$$MODE" == K8S ]; then \
-		${COMPOSE} build; \
+		${COMPOSE} build ${BUILD_OPS}; \
 	else \
 		mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml; \
 	fi
@@ -44,7 +45,7 @@ down:
 	if [ "$$MODE" == DOCKER ]; then \
 		${DOCKER} rm -f java-springboot-svc; \
 	elif [ "$$MODE" == K8S ]; then \
-		cd k8s/ && kubectl delete -k . && cd -; \
+		cd k8s/ && kubectl delete -k . && cd - || true; \
 	else \
 		echo "NOOP"; \
 	fi
@@ -75,3 +76,7 @@ k8s-health:
 .PHONY: stress-test
 stress-tests:
 	ab -n 10000 -c 100 -T 'application/json; charset=utf-8' -m GET http://127.0.0.1:8080/v1/books
+
+.PHONY: k8s-scale
+k8s-scale:
+	kubectl -n apps scale --replicas=2 deployment java-springboot-svc
