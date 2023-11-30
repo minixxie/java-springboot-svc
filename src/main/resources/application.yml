@@ -47,7 +47,7 @@ management:
 xxl:
   job:
     admin:
-      addresses: http://xxljob-2-3-1:8080/xxl-job-admin
+      addresses: http://xxl-job-admin.xxl-job.svc:8080
     accessToken: default_token
     executor:
       appname: java-springboot-svc

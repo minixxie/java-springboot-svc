@@ -12,7 +12,7 @@ spec:
     metadata:
       annotations:
         # "sidecar.jaegertracing.io/inject": "true"  # https://access.redhat.com/documentation/en-us/openshift_container_platform/4.4/html/jaeger/jaeger-sidecar-automatic_jaeger-deploying
-        # sidecar.opentelemetry.io/inject: "true"  # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#install-opentelemetry-collector
+        sidecar.opentelemetry.io/inject: "true"  # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#install-opentelemetry-collector
       labels:
         appID: java-springboot-svc
     spec:
@@ -46,7 +46,8 @@ spec:
         # same as JVM option -Dotel.exporter.otlp.endpoint=http://signoz-otel-collector.signoz.svc:4317
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           #value: "http://signoz-otel-collector.signoz.svc:4317"  # sending gRPC to collector in signoz chart
-          value: "http://opentelemetry-collector.otel.svc:4317"  # sending gRPC to collector in opentelemetry-collector chart (must have http:// prefix)
+          #value: "http://opentelemetry-collector.otel.svc:4317"  # sending gRPC to collector in opentelemetry-collector chart (must have http:// prefix)
+          value: "http://localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
         # same as JVM option -Dotel.resource.attributes=service.name=java-springboot-svc
         - name: OTEL_RESOURCE_ATTRIBUTES
           value: "service.name=java-springboot-svc"
