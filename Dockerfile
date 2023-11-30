@@ -1,10 +1,4 @@
-FROM eclipse-temurin:19.0.1_10-jdk as jdk
-
-RUN cd /usr/local \
-	&& wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz \
-	&& tar xzf apache-maven-3.9.4-bin.tar.gz \
-	&& ln -sf /usr/local/apache-maven-3.9.4/bin/mvn /usr/local/bin/mvn \
-	&& rm -rf /usr/local/apache-maven-3.9.4-bin.tar.gz
+FROM minixxie/eclipse-temurin:19.0.1_10-jdk-mvn as jdk
 
 ARG APP_NAME
 
