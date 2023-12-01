@@ -7,6 +7,10 @@ SHELL := /bin/bash
 tools:
 	sdk install java 19.0.1-amzn && sdk use java 19.0.1-amzn
 
+.PHONY: sh
+sh:
+	nerdctl run --rm -it -v "$$PWD:/app" -w /app minixxie/eclipse-temurin:19.0.1_10-jdk-mvn bash
+
 .PHONY: lint
 lint:
 	#mvn checkstyle:checkstyle
