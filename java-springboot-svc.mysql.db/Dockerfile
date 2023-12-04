@@ -1,0 +1,6 @@
+FROM bitnami/mysql:8.2.0-debian-11-r0
+
+WORKDIR /db
+ADD . .
+
+COPY --from=migrate/migrate:v4.16.2 /usr/local/bin/migrate /usr/local/bin/migrate

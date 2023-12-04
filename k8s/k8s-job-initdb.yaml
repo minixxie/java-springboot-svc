@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: java-springboot-svc-mysql-db
+  namespace: db
+  annotations:
+  labels:
+    appID: java-springboot-svc
+spec:
+  template:
+    metadata:
+      labels:
+        appID: java-springboot-svc
+    spec:
+      containers:
+        - name: init-db
+          image: java-springboot-svc-mysql-db:dont_push
+          imagePullPolicy: Never
+          command: ["bash", "-c"]
+          args:
+           - |
+             ./k8s-job-initdb.sh
+          envFrom:
+            - secretRef:
+                name: mysql
+          env:
+            - name: HOST
+              value: mysql.db.svc.cluster.local
+            - name: USER
+              value: root
+            - name: MYSQL_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-root-password
+      restartPolicy: OnFailure
+  parallelism: 1
+  completions: 1
+  backoffLimit: 6

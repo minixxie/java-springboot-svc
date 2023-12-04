@@ -28,6 +28,7 @@ build:
 	else \
 		mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml; \
 	fi
+	cd ./java-springboot-svc.mysql.db && make build && cd -
 
 # --add-opens java.base/java.lang=ALL-UNNAMED: https://stackoverflow.com/questions/68168691/java-lang-reflect-inaccessibleobjectexception-unable-to-make-protected-final-ja
 .PHONY: up
@@ -53,6 +54,10 @@ down:
 	else \
 		echo "NOOP"; \
 	fi
+
+.PHONY: wait
+wait:
+	NS=apps DEPLOYMENT=java-springboot-svc ../scripts/k8s-wait-deployment.sh
 
 .PHONY: logs
 logs:
