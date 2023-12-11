@@ -21,10 +21,12 @@ spec:
         image: java-springboot-svc:dont_push
         imagePullPolicy: IfNotPresent
         # --add-opens java.base/java.lang=ALL-UNNAMED - https://stackoverflow.com/questions/68168691/java-lang-reflect-inaccessibleobjectexception-unable-to-make-protected-final-ja
-        command: ["java",
-                  "--add-opens", "java.base/java.lang=ALL-UNNAMED",
-                  "-javaagent:/opentelemetry-javaagent.jar",
-                  "-jar", "/app.jar"]
+        command:
+          - /bin/bash
+          - -c
+          - |
+            /update-tz.sh
+            java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/opentelemetry-javaagent.jar -jar /app.jar
         ports:
         - name: http
           containerPort: 8080  # spring boot HTTP port
