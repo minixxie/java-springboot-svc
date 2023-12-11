@@ -18,8 +18,8 @@ spec:
           imagePullPolicy: Never
           command: ["bash", "-c"]
           args:
-           - |
-             ./k8s-job-initdb.sh
+            - |
+              ./k8s-job-initdb.sh
           envFrom:
             - secretRef:
                 name: mysql

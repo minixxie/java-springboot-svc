@@ -7,8 +7,8 @@ commonLabels:
   appID: java-springboot-svc
 
 resources:
-- k8s-job-initdb.yaml
-- deployment.yaml
-- service.yaml
-- ingress.yaml
-#- service-monitor.yaml
+  - k8s-job-initdb.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  #- service-monitor.yaml

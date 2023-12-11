@@ -5,13 +5,13 @@ metadata:
   namespace: apps
 spec:
   rules:
-  - host: java-springboot-svc.local
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: java-springboot-svc
-            port:
-              number: 8080
+    - host: java-springboot-svc.local
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: java-springboot-svc
+                port:
+                  number: 8080
