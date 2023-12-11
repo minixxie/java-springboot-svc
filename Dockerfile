@@ -11,7 +11,7 @@ ADD . .
 RUN --mount=type=cache,target=/root/.m2 mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml
 #RUN mvn package -Dmaven.test.skip=true
 
-FROM eclipse-temurin:19.0.1_10-jre
+FROM minixxie/eclipse-temurin:19.0.1_10-jre
 
 ARG APP_NAME
 ENV APP_NAME=${APP_NAME}
@@ -22,7 +22,9 @@ ADD ./src/main/resources/application.yml /config/application.local.yml
 
 ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar /opentelemetry-javaagent.jar
 
-COPY        --from=minixxie/static-healthcheck /healthcheck /
+RUN /update-tz.sh
+
+COPY        --from=minixxie/static-healthcheck:1ebd74e /healthcheck /
 HEALTHCHECK --interval=5s --timeout=2s --start-period=30s --retries=2 CMD ["/healthcheck", "-http", "http://127.0.0.1:8080/actuator/health"]
 # HTTP port
 EXPOSE 8080
