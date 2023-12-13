@@ -1,0 +1,2 @@
+GET http://java-springboot2-svc.local/v1/request-paths
+Content-Type: application/json; charset=utf-8

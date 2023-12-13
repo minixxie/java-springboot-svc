@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: java-springboot-svc
+  name: java-springboot2-svc
   namespace: apps
 spec:
   replicas: 2
   selector:
     matchLabels:
-      appID: java-springboot-svc
+      appID: java-springboot2-svc
   template:
     metadata:
       annotations:
@@ -16,7 +16,7 @@ spec:
         # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#install-opentelemetry-collector
         sidecar.opentelemetry.io/inject: "true"
       labels:
-        appID: java-springboot-svc
+        appID: java-springboot2-svc
     spec:
       containers:
         - name: java
@@ -46,7 +46,7 @@ spec:
             periodSeconds: 30
           env:
             - name: appID
-              value: java-springboot-svc
+              value: java-springboot2-svc
             # just in case useful for accessing any daemonset
             - name: HOST_IP
               valueFrom:
@@ -64,8 +64,8 @@ spec:
               #value: "http://localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
               value: "localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
               #value: "sidecar-collector.apps.svc:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
-            # same as JVM option -Dotel.resource.attributes=service.name=java-springboot-svc
+            # same as JVM option -Dotel.resource.attributes=service.name=java-springboot2-svc
             - name: OTEL_RESOURCE_ATTRIBUTES
-              value: "service.name=java-springboot-svc"
+              value: "service.name=java-springboot2-svc"
             - name: OTEL_SDK_DISABLED
               value: "false"
