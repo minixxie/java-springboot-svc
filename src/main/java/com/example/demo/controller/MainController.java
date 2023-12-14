@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * class MainController, handles "main" API endpoints.
@@ -36,7 +37,15 @@ public class MainController {
   @GetMapping("/v1/request-paths")
   public List<String> getRequestPaths() {
     ArrayList<String> result = new ArrayList();
-    result.add(System.getenv("appID"));
+    String appId = System.getenv("appID");
+    result.add(appId);
+
+    if ("java-springboot-svc".equals(appId)) {
+      String uri = "http://java-springboot2-svc.apps.svc:8080/v1/request-paths";
+      RestTemplate restTemplate = new RestTemplate();
+      String upstreamResult = restTemplate.getForObject(uri, String.class);
+      log.info("upstramResult: " + upstreamResult);
+    }
     return result;
   }
 }
