@@ -29,6 +29,8 @@ spec:
             - |
               /update-tz.sh
               java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/opentelemetry-javaagent.jar -jar /app.jar
+          # java --add-opens java.base/java.lang=ALL-UNNAMED -jar /app.jar
+          # java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/opentelemetry-javaagent.jar -jar /app.jar
           ports:
             - name: http
               containerPort: 8080  # spring boot HTTP port
@@ -36,6 +38,12 @@ spec:
               containerPort: 8081  # spring boot actuator HTTP port
             - name: xxljob
               containerPort: 9999  # xxl-job HTTP port
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 30
           env:
             # just in case useful for accessing any daemonset
             - name: HOST_IP
@@ -51,7 +59,9 @@ spec:
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               #value: "http://signoz-otel-collector.signoz.svc:4317"  # sending gRPC to collector in signoz chart
               #value: "http://opentelemetry-collector.otel.svc:4317"  # sending gRPC to collector in opentelemetry-collector chart (must have http:// prefix)
-              value: "http://localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
+              #value: "http://localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
+              value: "localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
+              #value: "sidecar-collector.apps.svc:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
             # same as JVM option -Dotel.resource.attributes=service.name=java-springboot-svc
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: "service.name=java-springboot-svc"

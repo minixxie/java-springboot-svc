@@ -24,7 +24,7 @@ build:
 	if [ "$$MODE" == DOCKER ]; then \
 		${COMPOSE} build; \
 	elif [ "$$MODE" == K8S ]; then \
-		${COMPOSE} build ${BUILD_OPS}; \
+		${DOCKER} build . -t java-springboot-svc:dont_push ${BUILD_OPS}; \
 	else \
 		mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml; \
 	fi
@@ -58,6 +58,7 @@ down:
 .PHONY: wait
 wait:
 	NS=apps DEPLOYMENT=java-springboot-svc ../scripts/k8s-wait-deployment.sh
+	NS=apps LABELS=appID=java-springboot-svc ../scripts/k8s-wait-pod.sh
 
 .PHONY: logs
 logs:
