@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Book;
 import com.example.demo.service.BookService;
+import com.jayway.jsonpath.JsonPath;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,8 +44,12 @@ public class MainController {
     if ("java-springboot-svc".equals(appId)) {
       String uri = "http://java-springboot2-svc.apps.svc:8080/v1/request-paths";
       RestTemplate restTemplate = new RestTemplate();
-      String upstreamResult = restTemplate.getForObject(uri, String.class);
-      log.info("upstramResult: " + upstreamResult);
+      String upstreamResultJson = restTemplate.getForObject(uri, String.class);
+      log.info("upstramResult: " + upstreamResultJson);
+
+      List<String> appIdList = JsonPath.read(upstreamResultJson, "$.data.*");
+      log.info("appIdList[0]: " + appIdList.get(0));
+      result.add(appIdList.get(0));
     }
     return result;
   }
