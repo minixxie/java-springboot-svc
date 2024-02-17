@@ -71,6 +71,10 @@ logs:
 		echo "NOOP"; \
 	fi
 
+.PHONY: test
+test:
+	if [ -x test.sh ]; then ./test.sh; fi
+
 .PHONY: curl
 curl:
 	curl -v http://127.0.0.1:8080/v1/books
