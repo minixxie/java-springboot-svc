@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: java-springboot-svc-mysql-db
-  namespace: db
+  namespace: infra-mysql
   annotations:
   labels:
     appID: java-springboot-svc
@@ -25,7 +25,7 @@ spec:
                 name: mysql
           env:
             - name: HOST
-              value: mysql.db.svc.cluster.local
+              value: mysql.infra-mysql.svc.cluster.local
             - name: USER
               value: root
             - name: MYSQL_PWD

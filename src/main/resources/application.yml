@@ -12,7 +12,7 @@ spring:
   datasource:
     # url: jdbc:postgresql://postgis-15-3-3:5432/java-springboot-svc?ssl=false
     # url: jdbc:mysql://127.0.0.1:3306/java-springboot-svc
-    url: jdbc:mysql://mysql.db.svc:3306/java-springboot-svc  # for mysql deployed in k8s in "db" namespace
+    url: jdbc:mysql://mysql.infra-mysql.svc:3306/java-springboot-svc  # for mysql deployed in k8s in "infra-mysql" namespace
     username: java-springboot-svc
     password: java-springboot-svc
     #driver-class-name: com.mysql.cj.jdbc.Driver
