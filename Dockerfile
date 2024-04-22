@@ -1,4 +1,4 @@
-FROM minixxie/eclipse-temurin:19.0.1_10-jdk-mvn as jdk
+FROM minixxie/eclipse-temurin:21.0.2_13-jdk as jdk
 
 ARG APP_NAME
 
@@ -11,7 +11,7 @@ ADD . .
 RUN --mount=type=cache,target=/root/.m2 mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml
 #RUN mvn package -Dmaven.test.skip=true
 
-FROM minixxie/eclipse-temurin:19.0.1_10-jre
+FROM minixxie/eclipse-temurin:21.0.2_13-jre
 
 ARG APP_NAME
 ENV APP_NAME=${APP_NAME}

@@ -24,7 +24,7 @@ build:
 	if [ "$$MODE" == DOCKER ]; then \
 		${COMPOSE} build; \
 	elif [ "$$MODE" == K8S ]; then \
-		${DOCKER} build . -t java-springboot-svc:dont_push ${BUILD_OPS}; \
+		${DOCKER} build . -t java-springboot-svc:dont_push ${BUILD_OPS} --namespace=k8s.io; \
 	else \
 		mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml; \
 	fi
