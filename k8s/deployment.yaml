@@ -61,11 +61,19 @@ spec:
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               #value: "http://signoz-otel-collector.signoz.svc:4317"  # sending gRPC to collector in signoz chart
               #value: "http://opentelemetry-collector.otel.svc:4317"  # sending gRPC to collector in opentelemetry-collector chart (must have http:// prefix)
-              #value: "http://localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
-              value: "localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
+              value: "http://localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
+              #value: "localhost:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
               #value: "sidecar-collector.apps.svc:4317"  # sending gRPC to otel collector as an injected side-car (must have http:// prefix)
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: grpc
             # same as JVM option -Dotel.resource.attributes=service.name=java-springboot-svc
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: "service.name=java-springboot-svc"
             - name: OTEL_SDK_DISABLED
               value: "false"
+            # finer control on "logs" exporting by the otel java agent
+            #- name: OTEL_LOGS_EXPORTER
+            #  value: "none"
+            # finer control on "metrics" exporting by the otel java agent
+            #- name: OTEL_METRICS_EXPORTER
+            #  value: "none"
