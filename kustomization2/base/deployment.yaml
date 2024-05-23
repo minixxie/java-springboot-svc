@@ -7,7 +7,7 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      appID: java-springboot2-svc
+      app: java-springboot2-svc
   template:
     metadata:
       annotations:
@@ -16,7 +16,7 @@ spec:
         # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#install-opentelemetry-collector
         sidecar.opentelemetry.io/inject: "true"
       labels:
-        appID: java-springboot2-svc
+        app: java-springboot2-svc
     spec:
       containers:
         - name: java

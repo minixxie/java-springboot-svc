@@ -5,12 +5,12 @@ metadata:
   namespace: infra-mysql
   annotations:
   labels:
-    appID: java-springboot-svc
+    app: java-springboot-svc
 spec:
   template:
     metadata:
       labels:
-        appID: java-springboot-svc
+        app: java-springboot-svc
     spec:
       containers:
         - name: init-db

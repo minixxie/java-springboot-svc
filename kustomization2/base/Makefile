@@ -8,4 +8,4 @@ down:
 
 .PHONY: ps
 ps:
-	kubectl -n apps get all -L appID=java-springboot2-svc
+	kubectl -n apps get all -L app=java-springboot2-svc

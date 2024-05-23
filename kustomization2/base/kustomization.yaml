@@ -4,7 +4,7 @@ metadata:
   name: arbitrary
 
 commonLabels:
-  appID: java-springboot2-svc
+  app: java-springboot2-svc
 
 resources:
   #- k8s-job-initdb.yaml

@@ -4,10 +4,10 @@ metadata:
   name: java-springboot-svc
   namespace: apps
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      appID: java-springboot-svc
+      app: java-springboot-svc
   template:
     metadata:
       annotations:
@@ -16,7 +16,7 @@ spec:
         # https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator#install-opentelemetry-collector
         sidecar.opentelemetry.io/inject: "true"
       labels:
-        appID: java-springboot-svc
+        app: java-springboot-svc
     spec:
       containers:
         - name: java

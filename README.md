@@ -2,7 +2,7 @@
 
 This is to record what need to be done on top of a freshly generated Springboot project, in order to:
 1. Be able to use Makefile to make the commands easier
-2. Be able to use Dockerfile to use docker build and run
+2. Be able to use Containerfile to use docker build and run
 3. Be able to use yaml to deploy the application into k8s cluster (with kustomize)
 4. Have a simple RESTful endpoint to return a string as an example
 

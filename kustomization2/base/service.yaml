@@ -5,7 +5,7 @@ metadata:
   namespace: apps
 spec:
   selector:
-    appID: java-springboot2-svc
+    app: java-springboot2-svc
   type: LoadBalancer
   ports:
   - name: http

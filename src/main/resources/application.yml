@@ -12,7 +12,7 @@ spring:
   datasource:
     # url: jdbc:postgresql://postgis-15-3-3:5432/java-springboot-svc?ssl=false
     # url: jdbc:mysql://127.0.0.1:3306/java-springboot-svc
-    url: jdbc:mysql://mysql.infra-mysql.svc:3306/java-springboot-svc  # for mysql deployed in k8s in "infra-mysql" namespace
+    url: jdbc:mysql://mysql.infra-mysql.svc.cluster.local:3306/java-springboot-svc  # for mysql deployed in k8s in "infra-mysql" namespace
     username: java-springboot-svc
     password: java-springboot-svc
     #driver-class-name: com.mysql.cj.jdbc.Driver
@@ -51,7 +51,7 @@ management:
 xxl:
   job:
     admin:
-      addresses: http://xxl-job-admin.xxl-job.svc:8080
+      addresses: http://xxl-job-admin.infra-xxljob.svc.cluster.local:8080
     accessToken: default_token
     executor:
       appname: java-springboot-svc

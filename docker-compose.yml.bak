@@ -7,7 +7,7 @@ services:
     hostname: java-springboot-svc
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Containerfile 
     networks:
       - local
     environment:

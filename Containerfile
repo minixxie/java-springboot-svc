@@ -1,4 +1,5 @@
 FROM minixxie/eclipse-temurin:21.0.2_13-jdk as jdk
+#FROM minixxie/graalvm-native-image-community:21.0.2 as jdk
 
 ARG APP_NAME
 
@@ -17,7 +18,6 @@ ARG APP_NAME
 ENV APP_NAME=${APP_NAME}
 
 COPY --from=jdk /app/target/demo-latest.jar /app.jar
-ADD ./src/main/resources/application.localdocker.yml /config/application.localdocker.yml
 ADD ./src/main/resources/application.yml /config/application.local.yml
 
 ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar /opentelemetry-javaagent.jar

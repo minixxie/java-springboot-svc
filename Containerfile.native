@@ -1,0 +1,34 @@
+#FROM minixxie/eclipse-temurin:21.0.2_13-jdk as jdk
+FROM minixxie/graalvm-native-image-community:21.0.2 as jdk
+
+ARG APP_NAME
+
+WORKDIR /app
+
+ADD pom.xml .
+#RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
+
+ADD . .
+RUN --mount=type=cache,target=/root/.m2 mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml
+#RUN mvn package -Dmaven.test.skip=true
+
+RUN native-image -jar /app/target/demo-latest.jar
+
+FROM ubuntu:22.04
+
+ARG APP_NAME
+ENV APP_NAME=${APP_NAME}
+
+COPY --from=jdk /app/demo-latest /app
+ADD ./src/main/resources/application.yml /config/application.local.yml
+
+#ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar /opentelemetry-javaagent.jar
+
+#RUN /update-tz.sh
+
+COPY        --from=minixxie/static-healthcheck:1ebd74e /healthcheck /
+HEALTHCHECK --interval=5s --timeout=2s --start-period=30s --retries=2 CMD ["/healthcheck", "-http", "http://127.0.0.1:8080/actuator/health"]
+# HTTP port
+EXPOSE 8080
+# xxl-job HTTP port
+EXPOSE 9999

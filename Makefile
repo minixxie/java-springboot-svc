@@ -1,15 +1,11 @@
 DOCKER ?= nerdctl
-COMPOSE ?= nerdctl compose
 BUILD_OPS ?= --namespace=k8s.io
 SHELL := /bin/bash
 
-.PHONY: tools
-tools:
-	sdk install java 19.0.1-amzn && sdk use java 19.0.1-amzn
-
 .PHONY: sh
 sh:
-	nerdctl run --rm -it -v "$$PWD:/app" -w /app minixxie/eclipse-temurin:19.0.1_10-jdk-mvn bash
+	nerdctl run --rm -it -v "$$PWD:/app" -w /app \
+		minixxie/eclipse-temurin:21.0.2_13-jdk bash
 
 .PHONY: lint
 lint:
@@ -21,23 +17,24 @@ lint:
 .PHONY: build
 build:
 	@source ./.mode.rc ; \
-	if [ "$$MODE" == DOCKER ]; then \
-		${COMPOSE} build; \
-	elif [ "$$MODE" == K8S ]; then \
+	if [ "$$MODE" == K8S ]; then \
 		${DOCKER} build . -t java-springboot-svc:dont_push ${BUILD_OPS} --namespace=k8s.io; \
 	else \
 		mvn checkstyle:check package -Dmaven.test.skip=true -Dcheckstyle.config.location=google_checks.xml; \
 	fi
 	cd ./java-springboot-svc.mysql.db && make build && cd -
+	nerdctl --namespace=k8s.io images | grep java-springboot-svc
+
+.PHONY: build-native
+build-native:
+	${DOCKER} build . -f Containerfile.native -t java-springboot-svc:dont_push ${BUILD_OPS} --namespace=k8s.io
 
 # --add-opens java.base/java.lang=ALL-UNNAMED: https://stackoverflow.com/questions/68168691/java-lang-reflect-inaccessibleobjectexception-unable-to-make-protected-final-ja
 .PHONY: up
 up: build down
 	@source ./.mode.rc ; \
-	if [ "$$MODE" == DOCKER ]; then \
-		${COMPOSE} up -d; \
-	elif [ "$$MODE" == K8S ]; then \
-		cd k8s/ && kubectl apply -k . && cd -; \
+	if [ "$$MODE" == K8S ]; then \
+		kubectl apply -k kustomization/base/; \
 		kubectl -n apps rollout restart deployment java-springboot-svc; \
 	else \
 		java --add-opens java.base/java.lang=ALL-UNNAMED \
@@ -47,10 +44,8 @@ up: build down
 .PHONY: down
 down:
 	@source ./.mode.rc ; \
-	if [ "$$MODE" == DOCKER ]; then \
-		${DOCKER} rm -f java-springboot-svc; \
-	elif [ "$$MODE" == K8S ]; then \
-		cd k8s/ && kubectl delete -k . && cd - || true; \
+	if [ "$$MODE" == K8S ]; then \
+		kubectl delete -k kustomization/base/ || true; \
 	else \
 		echo "NOOP"; \
 	fi
@@ -58,15 +53,20 @@ down:
 .PHONY: wait
 wait:
 	NS=apps DEPLOYMENT=java-springboot-svc ../scripts/k8s-wait-deployment.sh
-	NS=apps LABELS=appID=java-springboot-svc ../scripts/k8s-wait-pod.sh
+	NS=apps LABELS=app=java-springboot-svc ../scripts/k8s-wait-pod.sh
+
+.PHONY: get
+get:
+	kubectl -n apps get all -l app=java-springboot-svc
+	kubectl -n apps get ing -l app=java-springboot-svc
+	kubectl -n apps get pvc -l app=java-springboot-svc
+	nerdctl --namespace=k8s.io images | grep java-springboot-svc
 
 .PHONY: logs
 logs:
 	@source ./.mode.rc ; \
-	if [ "$$MODE" == DOCKER ]; then \
-		${DOCKER} logs -f java-springboot-svc; \
-	elif [ "$$MODE" == K8S ]; then \
-		kubectl -n apps logs -f -l appID=java-springboot-svc; \
+	if [ "$$MODE" == K8S ]; then \
+		./logs; \
 	else \
 		echo "NOOP"; \
 	fi
